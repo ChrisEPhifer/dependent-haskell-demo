@@ -38,6 +38,10 @@ data Nat = Zero | Succ Nat
 -- constructors 'Zero and 'Succ to add value information to the value
 -- constructors, in service of embedding at the type level information about
 -- the length of the vector.
+data Vector (n :: Nat) (a :: *) where
+    VNil  :: Vector 'Zero a
+    VCons :: a -> Vector n a -> Vector ('Succ n) a
+
 --
 -- Notice: We annotate n to have kind Nat, a to have kind *, and explicitly
 -- annotate the types of our two value constructors using the lifted type
@@ -46,16 +50,13 @@ data Nat = Zero | Succ Nat
 -- for us, so we could have written this type as:
 --
 -- data Vector n a where
---     VNil :: Vector Zero a
+--     VNil  :: Vector Zero a
 --     VCons :: a -> Vector n a -> Vector (Succ n) a
 --
 -- where we left off the kind annotations and the explicit usage of the type
 -- constructor versions of Zero and Succ. Since this is all new and it helps to
 -- see the separation between value- and type-level constructs, we've left the
 -- explicitly annotated version as the implementation given to GHC.
-data Vector (n :: Nat) (a :: *) where
-    VNil  :: Vector 'Zero a
-    VCons :: a -> Vector n a -> Vector ('Succ n) a
 
 -- So we can do useful things in the repl, we'll write a Show instance for this
 -- type.
@@ -89,7 +90,8 @@ type family Add n m where
 -- errors, I recommend on your own changing to this implementation to see what
 -- happens.
 
--- Without further ado, we implement the append function:
+-- Without further ado, we implement the append function which, given all the
+-- nonsense above, doesn't look too bad:
 append :: Vector n a -> Vector m a -> Vector (Add n m) a
 append VNil xs         = xs
 append (VCons x xs) ys = VCons x (append xs ys)
