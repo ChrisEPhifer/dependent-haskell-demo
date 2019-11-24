@@ -1,5 +1,3 @@
-{-# LANGUAGE DataKinds, GADTs, KindSignatures, TypeFamilies #-}
-
 module Main where
 
 import Lib

@@ -18,11 +18,6 @@
 -- all of the cases are defined at once.
 {-# LANGUAGE TypeFamilies #-}
 
--- Load the UndecidableInstances extension, which prevents GHC from complaining
--- about instance definitions that it can't reason about in terms of
--- decidability. Use with caution!
-{-# LANGUAGE UndecidableInstances #-}
-
 -- Load the TypeOperators extension, which allows us to use symbolic
 -- constructors at the type-level.
 {-# LANGUAGE TypeOperators #-}
