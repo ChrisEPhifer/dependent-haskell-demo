@@ -27,8 +27,8 @@ module Lib where
 -- Here, we define a new datatype to represent natural numbers. Because we have
 -- the DataKinds extension loaded, however, this also defines:
 -- * A kind Nat
--- * A type constant 'Zero
--- * A type constructor 'Succ which accepts a type of kind Nat
+-- * A type constant 'Zero, of kind Nat
+-- * A type constructor 'Succ, of kind Nat -> Nat
 -- We'll see how to use these new features when we implement the Vector type.
 -- NOTE: There are no values of types of kind Nat! Only types of kind * have
 -- values.
