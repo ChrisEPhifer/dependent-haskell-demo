@@ -42,7 +42,6 @@ data Vector (n :: Nat) (a :: *) where
     VNil  :: Vector 'Zero a
     VCons :: a -> Vector n a -> Vector ('Succ n) a
 
---
 -- Notice: We annotate n to have kind Nat, a to have kind *, and explicitly
 -- annotate the types of our two value constructors using the lifted type
 -- constructors 'Zero and 'Succ to capture the information about the length
