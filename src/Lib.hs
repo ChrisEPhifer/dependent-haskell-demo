@@ -71,7 +71,7 @@ instance Show a => Show (Vector n a) where
 -- The question is what would we like to put in place of "???"? As you might
 -- expect, the answer is something like (n + m); this would mean, at compile
 -- time, we can verify that the implementation of append we provide satisfies
--- the property length (append v1 v2) == (length v1) + (length v2). But, how do
+-- the property: length (append v1 v2) == (length v1) + (length v2). But, how do
 -- we put functions at the type level? This requires the TypeFamilies extension
 -- and looks something like this:
 type family Add n m where
@@ -87,10 +87,11 @@ type family Add n m where
 -- We would run into some gnarly type errors due to structural inequality.
 -- Since getting into this requires breaking down some nasty Haskell type
 -- errors, I recommend on your own changing to this implementation to see what
--- happens.
+-- happens. You may need to add the language extension UndecidableInstances to
+-- get this alternative version to typecheck.
 
 -- Without further ado, we implement the append function which, given all the
--- nonsense above, doesn't look too bad:
+-- nonsense above, doesn't look all too bad:
 append :: Vector n a -> Vector m a -> Vector (Add n m) a
 append VNil xs         = xs
 append (VCons x xs) ys = VCons x (append xs ys)
